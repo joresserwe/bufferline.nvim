@@ -287,10 +287,11 @@ local function add_indicator(context)
   if is_slant(style) then return { text = symbol, highlight = highlight } end
 
   local is_current = element:current()
+  local is_visible = element:visible()
 
-  symbol = is_current and options.indicator.icon or symbol
+  symbol = is_current and options.indicator.icon or is_visible and options.indicator.visible_icon or symbol
   highlight = is_current and hl.indicator_selected.hl_group
-    or element:visible() and hl.indicator_visible.hl_group
+    or is_visible and hl.indicator_visible.hl_group
     or curr_hl.buffer
 
   if options.indicator.style ~= "icon" then return { text = padding, highlight = highlight } end
